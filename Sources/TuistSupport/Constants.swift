@@ -1,6 +1,6 @@
 import Foundation
 
-public struct Constants {
+public enum Constants {
     public static let versionFileName = ".tuist-version"
     public static let binFolderName = ".tuist-bin"
     public static let binName = "tuist"
@@ -22,40 +22,45 @@ public struct Constants {
     public static let joinSlackURL: String = "https://slack.tuist.io/"
     public static let tuistGeneratedFileName = ".tuist-generated"
 
-    public struct Vendor {
+    public enum Vendor {
         public static let swiftLint = "swiftlint"
         public static let swiftDoc = "swift-doc"
     }
 
-    public struct DependenciesDirectory {
+    public enum DependenciesDirectory {
         public static let name = "Dependencies"
         public static let lockfilesDirectoryName = "Lockfiles"
         public static let cartfileResolvedName = "Cartfile.resolved"
         public static let carthageDirectoryName = "Carthage"
     }
 
-    public struct DerivedDirectory {
+    public enum DerivedDirectory {
         public static let name = "Derived"
         public static let infoPlists = "InfoPlists"
         public static let sources = "Sources"
         public static let signingKeychain = "signing.keychain"
     }
 
-    public struct AsyncQueue {
+    public enum AsyncQueue {
         public static let directoryName: String = "Queue"
     }
 
-    public struct EnvironmentVariables {
+    public enum EnvironmentVariables {
         public static let verbose = "TUIST_VERBOSE"
         public static let colouredOutput = "TUIST_COLOURED_OUTPUT"
         public static let versionsDirectory = "TUIST_VERSIONS_DIRECTORY"
         public static let cacheDirectory = "TUIST_CACHE_DIRECTORY"
         public static let queueDirectory = "TUIST_QUEUE_DIRECTORY"
+        public static let pluginsDirectory = "TUIST_PLUGINS_DIRECTORY"
         public static let cloudToken = "TUIST_CLOUD_TOKEN"
         public static let cacheManifests = "TUIST_CACHE_MANIFESTS"
     }
 
-    public struct GoogleCloud {
+    public enum GoogleCloud {
         public static let relasesBucketURL = "https://storage.googleapis.com/tuist-releases/"
+    }
+
+    public enum Plugin {
+        public static let directoryName = "Plugins"
     }
 }

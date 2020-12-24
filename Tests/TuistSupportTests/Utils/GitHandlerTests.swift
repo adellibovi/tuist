@@ -46,15 +46,15 @@ final class GitHandlerTests: TuistUnitTestCase {
     }
 
     func test_checkout() throws {
-        let id = "main"
+        let reference = "main"
 
-        system.stubs["git checkout \(id)"] = (stderror: nil, stdout: nil, exitstatus: 0)
+        system.stubs["git checkout \(reference)"] = (stderror: nil, stdout: nil, exitstatus: 0)
 
-        XCTAssertNoThrow(try subject.checkout(id: id, in: nil))
+        XCTAssertNoThrow(try subject.checkout(reference: reference, in: nil))
     }
 
     func test_checkout_WITH_path() throws {
-        let id = "main"
+        let reference = "main"
         let path = try temporaryPath()
 
         let expectedCommand = [
@@ -64,12 +64,12 @@ final class GitHandlerTests: TuistUnitTestCase {
             "--work-tree",
             path.pathString,
             "checkout",
-            id,
+            reference,
         ].joined(separator: " ")
 
         system.stubs[expectedCommand] = (stderror: nil, stdout: nil, exitstatus: 0)
 
-        XCTAssertNoThrow(try subject.checkout(id: id, in: path))
+        XCTAssertNoThrow(try subject.checkout(reference: reference, in: path))
         XCTAssertTrue(system.called(
             "git",
             "--git-dir",
@@ -77,7 +77,7 @@ final class GitHandlerTests: TuistUnitTestCase {
             "--work-tree",
             path.pathString,
             "checkout",
-            id
+            reference
         ))
     }
 }

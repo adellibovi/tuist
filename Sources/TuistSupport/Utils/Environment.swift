@@ -34,6 +34,9 @@ public protocol Environmenting: AnyObject {
 
     /// Returns the path to the directory where the async queue events are persisted.
     var queueDirectory: AbsolutePath { get }
+
+    /// Returns the plugins directory
+    var pluginsDirectory: AbsolutePath { get }
 }
 
 /// Local environment controller.
@@ -153,6 +156,14 @@ public class Environment: Environmenting {
     /// Settings path.
     public var settingsPath: AbsolutePath {
         directory.appending(component: "settings.json")
+    }
+
+    public var pluginsDirectory: AbsolutePath {
+        if let envVariable = ProcessInfo.processInfo.environment[Constants.EnvironmentVariables.cacheDirectory] {
+            return AbsolutePath(envVariable)
+        } else {
+            return directory.appending(component: Constants.Plugin.directoryName)
+        }
     }
 
     // MARK: - Fileprivate

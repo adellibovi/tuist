@@ -18,6 +18,7 @@ public class MockEnvironment: Environmenting {
     public var isVerbose: Bool = false
     public var cacheDirectoryStub: AbsolutePath?
     public var queueDirectoryStub: AbsolutePath?
+    public var pluginsDirectoryStub: AbsolutePath?
     public var shouldOutputBeColoured: Bool = false
     public var isStandardOutputInteractive: Bool = false
     public var tuistVariables: [String: String] = [:]
@@ -45,6 +46,10 @@ public class MockEnvironment: Environmenting {
 
     public var buildCacheDirectory: AbsolutePath {
         cacheDirectory.appending(component: "BuildCache")
+    }
+
+    public var pluginsDirectory: AbsolutePath {
+        pluginsDirectoryStub ?? directory.path.appending(component: Constants.Plugin.directoryName)
     }
 
     func path(version: String) -> AbsolutePath {

@@ -16,7 +16,7 @@ public final class MockGitHandler: GitHandling {
     }
 
     public private(set) var checkoutStub: ((String, AbsolutePath?) -> Void)?
-    public func checkout(id: String, in path: AbsolutePath?) throws {
-        checkoutStub?(id, path)
+    public func checkout(reference: String, in path: AbsolutePath?) throws {
+        checkoutStub?(reference, path)
     }
 }

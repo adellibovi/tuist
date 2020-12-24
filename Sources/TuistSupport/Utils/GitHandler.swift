@@ -26,9 +26,9 @@ public protocol GitHandling {
     ///  - A sha, i.e. `028c13b`
     ///
     /// - Parameters:
-    ///   - id: An identifier for the `git checkout` command.
+    ///   - reference: An identifier for the `git checkout` command, usually a sha or branch.
     ///   - path: The path to the git repository (location with `.git` directory) in which to perform the checkout.
-    func checkout(id: String, in path: AbsolutePath?) throws
+    func checkout(reference: String, in path: AbsolutePath?) throws
 }
 
 /// An implementation of `GitHandling`.
@@ -54,15 +54,15 @@ public final class GitHandler: GitHandling {
         }
     }
 
-    public func checkout(id: String, in path: AbsolutePath?) throws {
+    public func checkout(reference: String, in path: AbsolutePath?) throws {
         if let path = path {
-            try performCheckout(id: id, in: path)
+            try performCheckout(reference: reference, in: path)
         } else {
-            try system.runAndPrint("git", "checkout", id)
+            try system.runAndPrint("git", "checkout", reference)
         }
     }
 
-    private func performCheckout(id: String, in path: AbsolutePath) throws {
+    private func performCheckout(reference: String, in path: AbsolutePath) throws {
         let gitDirectory = path.appending(component: ".git")
 
         try system.runAndPrint(
@@ -72,7 +72,7 @@ public final class GitHandler: GitHandling {
             "--work-tree",
             path.pathString,
             "checkout",
-            id
+            reference
         )
     }
 }

@@ -13,6 +13,8 @@ extension TuistCore.Dependencies {
                 let requirement = try TuistCore.CarthageDependency.Requirement.from(manifest: requirement)
                 let platforms = try platforms.map { try TuistCore.Platform.from(manifest: $0) }
                 result.append(CarthageDependency(origin: origin, requirement: requirement, platforms: Set(platforms)))
+            case .spm:
+                #warning("IMPLEMENT ME")
             }
         }
 
